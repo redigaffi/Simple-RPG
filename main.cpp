@@ -1,5 +1,5 @@
 /*
-	Important include and header files
+	Jordi Hoock Castro
 */
 #include <iostream>
 #include "classes/system.cpp"
@@ -32,26 +32,26 @@ int main ()
 		cin >> regorlog;
 		cout << endl;
 
-			/*
-				Menu, is for register and login the same
-			*/
-			if (regorlog == "/register" || regorlog == "/login")
-			{
-				cout << "Username: ";
-				cin >> ::username;
-				cout << "Password: ";
-				cin >> ::password;
-			}
-			else
-			{
-				cout << "What is your intention ;) ";
-			}
+		/*
+			Menu, is for register and login the same
+		*/
+		if (regorlog == "/register" || regorlog == "/login")
+		{
+			cout << "Username: ";
+			cin >> ::username;
+			cout << "Password: ";
+			cin >> ::password;
+		}
+		else
+		{
+			cout << "What is your intention ;) ";
+		}
 			
-			/*
-				Creating the object with user details, and
-				debug mode, maintence mode.
-			*/
-			core _system(username, password, false, maintence);
+		/*
+			Creating the object with user details, and
+			debug mode, maintence mode.
+		*/
+		core _system(username, password, false, maintence);
 
 		/*
 			The user want to register
