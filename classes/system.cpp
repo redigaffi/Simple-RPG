@@ -1,7 +1,12 @@
+/*
+	Jordi Hoock Castro
+*/
+
 #include <iostream>
 #include <fstream>
 using namespace std;
 
+char a ;
 ifstream _check("data/users.txt");
 
 class core
@@ -60,7 +65,7 @@ class core
 
 				}
 			}
-			catch (int a) {}
+			catch ( ... ) { cout << "The're were an error"; }
 			return (this->userCorrect);
 		}
 
