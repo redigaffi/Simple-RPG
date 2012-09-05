@@ -2,6 +2,7 @@
 	Jordi Hoock Castro
 */
 #include <iostream>
+#include <fstream>
 #include "classes/system.cpp"
 using namespace std;
 
@@ -51,39 +52,31 @@ int main ()
 			Creating the object with user details, and
 			debug mode, maintence mode.
 		*/
-		core _system(username, password, false, maintence);
+		core _system(&username, &password, false, &maintence);
 
 		/*
 			The user want to register
 		*/
 		if(regorlog == "/register")
 		{
-			/*_system.login();
-			if (_system.userCorrect)
+
+			/*if (_system.login())
 				cout << "You're username already exists";
 			else
-			{
-				cout << "You can do it ;)";
-			}*/
+				cout << "You can do it ;)";*/
 		}
-		else
+
+		/*
+			Want the user login?, Yes? then check's if the user exists
+		*/
+		if(regorlog == "/login")
 		{
-			/*
-				Want the user login?, Yes? then check's if the user exists
-			*/
-			if(regorlog == "/login")
-			{
-				if (_system.login())
-				{
-					loggedIN = true;
-				}
-				else
-				{
-					cout << "You're username doesn't exists in our database, please register.";
-					loggedIN = false;		
-				}
-			}
+			if (_system.login())
+				loggedIN = true;
+			else
+				loggedIN = false;		
 		}
+
 	}
 	else
 	{
@@ -105,6 +98,8 @@ int main ()
 		}
 
 	}
+	else
+		cout << "Username is wrong";
 
 
 }

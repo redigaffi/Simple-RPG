@@ -6,31 +6,37 @@
 #include <fstream>
 using namespace std;
 
-char a ;
-ifstream _check("data/users.txt");
+ifstream userFile("data/user.txt");
+
 
 class core
 {
+
 	string name;
 	string password;
+	string tempId;
+	string tempUser;
+	string tempPass;
 	const bool debugMode;
 	bool registerCorrect;
 	bool maintence;
 	bool userCorrect;
 
 	public:
+
 		/*
 			Save data introduced by user
 			into variables
 		*/
-		core(string n, string p, bool debug, bool maint) 
-		:name(n), password(p), debugMode(debug), maintence(maint)
+		core(string *n, string *p, bool debug, bool maint) 
+		:name(*n), password(*p), debugMode(debug), maintence(maint)
 		{
+
 			if (this->debugMode)
 				cout << "\nSystem Inicialized!\n" << endl;
 			try
 			{
-				if(! _check.is_open())
+				if(! userFile.is_open())
 					throw 0;
 			}
 			catch (int error)
@@ -46,27 +52,26 @@ class core
 		*/
 		bool login ()
 		{
-			string tempUser;
-			string tempPass;
+
 			try
 			{
-				while (_check >> tempUser >> tempPass) 
+
+				while (userFile >> this->tempId >> this->tempUser >> this->tempPass) 
 				{
-					if (tempUser == this->name && tempPass == password)
+					if (this->tempUser == this->name && this->tempPass == this->password)
 					{
-						this->userCorrect = true;
-						break;
+						this->userCorrect = true;	
+						break;			
 					}
 					else
-					{
-						this->userCorrect = false;
-						throw 1;
-					}
-
+						this->userCorrect = false;	
 				}
+
 			}
-			catch ( ... ) { cout << "The're were an error"; }
+			catch ( ... ) { }
+
 			return (this->userCorrect);
+
 		}
 
 };
