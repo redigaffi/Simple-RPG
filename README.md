@@ -7,4 +7,4 @@ if you want to give me the thanks, please email-me at: jordixboy@gmail.com
 <hr />
 
 <strong>Currently Features:</strong>
-~Constructing ..
+~Constructing ...
