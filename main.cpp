@@ -52,7 +52,11 @@ int main ()
 			Creating the object with user details, and
 			debug mode, maintence mode.
 		*/
+<<<<<<< HEAD
 		core _system(&username, &password, false, &maintence);
+=======
+		core _system(username, password, false, maintence);
+>>>>>>> fcb158daacce3de8baa4a2b64aaa4f52b77fc38c
 
 		/*
 			The user want to register

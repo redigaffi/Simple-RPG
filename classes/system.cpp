@@ -6,8 +6,13 @@
 #include <fstream>
 using namespace std;
 
+<<<<<<< HEAD
 ifstream userFile("data/user.txt");
 
+=======
+char a ;
+ifstream _check("data/users.txt");
+>>>>>>> fcb158daacce3de8baa4a2b64aaa4f52b77fc38c
 
 class core
 {
@@ -68,8 +73,12 @@ class core
 				}
 
 			}
+<<<<<<< HEAD
 			catch ( ... ) { }
 
+=======
+			catch ( ... ) { cout << "The're were an error"; }
+>>>>>>> fcb158daacce3de8baa4a2b64aaa4f52b77fc38c
 			return (this->userCorrect);
 
 		}
