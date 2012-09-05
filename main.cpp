@@ -3,7 +3,7 @@
 */
 #include <iostream>
 #include <fstream>
-#include "classes/system.cpp"
+#include "classes/system.hpp"
 using namespace std;
 
 /*
@@ -52,11 +52,8 @@ int main ()
 			Creating the object with user details, and
 			debug mode, maintence mode.
 		*/
-<<<<<<< HEAD
 		core _system(&username, &password, false, &maintence);
-=======
-		core _system(username, password, false, maintence);
->>>>>>> fcb158daacce3de8baa4a2b64aaa4f52b77fc38c
+
 
 		/*
 			The user want to register
@@ -92,6 +89,7 @@ int main ()
 
 	if (loggedIN)
 	{
+
 		cout << "\nWelcome " << username << "\n" << endl;
 		cout << "OPTION: ";
 		while (cin >> text)
