@@ -11,14 +11,20 @@ ifstream userFile("data/user.txt");
 class core
 {
 
-	string name;
-	string password;
-	string tempId;
-	string tempUser;
-	string tempPass;
-	const bool debugMode;
+	struct UserData
+	{
+
+		string name;
+		string password;
+		string tempId;
+		string tempUser;
+		string tempPass;
+
+	}*uData, ud;
+
+	bool debugMode;
 	bool registerCorrect;
-	bool maintence;
+	const bool maintence;
 	bool userCorrect;
 
 	public:
@@ -27,9 +33,12 @@ class core
 			Save data introduced by user
 			into variables
 		*/
-		core(string *n, string *p, bool debug, bool maint) 
-		:name(*n), password(*p), debugMode(debug), maintence(maint)
+		core(string n, string p, bool debug, bool maint) 
+		:debugMode(debug), maintence(maint)
 		{
+			uData = &ud;
+			uData->name = n;
+			uData->password = p;
 
 			if (this->debugMode)
 				cout << "\nSystem Inicialized!\n" << endl;
@@ -55,9 +64,9 @@ class core
 			try
 			{
 
-				while (userFile >> this->tempId >> this->tempUser >> this->tempPass) 
+				while (userFile >> uData->tempId >> uData->tempUser >> uData->tempPass) 
 				{
-					if (this->tempUser == this->name && this->tempPass == this->password)
+					if (uData->tempUser == uData->name && uData->tempPass == uData->password)
 					{
 						this->userCorrect = true;	
 						break;			
