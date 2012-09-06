@@ -6,25 +6,25 @@
 #include <fstream>
 using namespace std;
 
-ifstream userFile("data/user.txt");
+ifstream userFile("data/users.txt");
+
+struct UserDetails
+{
+	string name;
+	string password;
+	string tempId;
+	string tempUser;
+	string tempPass;
+
+}*user, ud;
+
 
 class core
 {
 
-	struct UserData
-	{
-
-		string name;
-		string password;
-		string tempId;
-		string tempUser;
-		string tempPass;
-
-	}*uData, ud;
-
 	bool debugMode;
-	bool registerCorrect;
 	const bool maintence;
+	bool registerCorrect;
 	bool userCorrect;
 
 	public:
@@ -33,24 +33,24 @@ class core
 			Save data introduced by user
 			into variables
 		*/
-		core(string n, string p, bool debug, bool maint) 
+		core(string *n, string *p, bool debug, bool maint) 
 		:debugMode(debug), maintence(maint)
 		{
-			uData = &ud;
-			uData->name = n;
-			uData->password = p;
+			user = &ud;
+			user->name = *n;
+			user->password = *p;
 
 			if (this->debugMode)
-				cout << "\nSystem Inicialized!\n" << endl;
+				cout << "\nSystem Inicialized!\n With user: " << user->name << "\nAnd password: " << user->password << endl;
 			try
 			{
 				if(! userFile.is_open())
 					throw 0;
 			}
-			catch (int error)
+			catch ( ... )
 			{
 				if (this->debugMode)
-					cout << "\nSYSTEM ERROR - " << error;
+					cout << "\nCRITICAL SYSTEM ERROR - ";
 			}	
 		}
 
@@ -63,24 +63,32 @@ class core
 
 			try
 			{
-
-				while (userFile >> uData->tempId >> uData->tempUser >> uData->tempPass) 
+				while (userFile >> user->tempId >> user->tempUser >> user->tempPass) 
 				{
-					if (uData->tempUser == uData->name && uData->tempPass == uData->password)
+					if (user->name == user->tempUser && user->password == user->tempPass)
 					{
-						this->userCorrect = true;	
-						break;			
+						this->userCorrect = true;
+						break;
 					}
 					else
-						this->userCorrect = false;	
+					{
+						this->userCorrect = false;
+						continue;
+					}
 				}
-
 			}
-			catch ( ... ) { }
+			catch ( ... ) 
+			{ 
+				if(this->debugMode)
+					cout << "An error ocurred loggin in";
+			}
 
 			return (this->userCorrect);
-
 		}
 
+		~core()
+		{
+			userFile.close();
+		}
 };
 
