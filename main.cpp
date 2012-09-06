@@ -17,25 +17,23 @@ string regorlog;
 /*
 	A structure from base of user details.
 */
-struct player
+struct user
 {
 	string username;
 	string password;
 
-}*user, u;
+}*player, u;
 
 /*
 	Principal Programm
 */
 int main ()
 {
-	/*
-		Do a pointer from our user structure
-	*/
-	user = &u;	
+	player = &u;
 
 	if (! maintence)
 	{
+
 		/*	
 			What do you want, register or login?
 		*/
@@ -52,9 +50,9 @@ int main ()
 		if (regorlog == "/register" || regorlog == "/login")
 		{
 			cout << "Username: ";
-			cin >> user->username;
+			cin >> player->username;
 			cout << "Password: ";
-			cin >> user->password;
+			cin >> player->password;
 		}
 		else
 		{
@@ -65,7 +63,7 @@ int main ()
 			Creating the object with user details, and
 			debug mode, maintence mode.
 		*/
-		core s(user->username, user->password, false, maintence);
+		core s(&player->username, &player->password, false, maintence);
 		core *_system = &s;
 
 
@@ -74,11 +72,10 @@ int main ()
 		*/
 		if(regorlog == "/register")
 		{
-
-			/*if (_system.login())
+			if (_system->login())
 				cout << "You're username already exists";
 			else
-				cout << "You can do it ;)";*/
+				cout << "You can do it ;)";
 		}
 
 		/*
@@ -86,10 +83,7 @@ int main ()
 		*/
 		if(regorlog == "/login")
 		{
-			if (_system->login())
-				loggedIN = true;
-			else
-				loggedIN = false;		
+			loggedIN = _system->login();
 		}
 
 	}
@@ -104,7 +98,10 @@ int main ()
 	if (loggedIN)
 	{
 
-		cout << "\nWelcome " << user->username << "\n" << endl;
+		cout << "\nWelcome " << player->username << " you Logged in\n" << endl;
+		cout << "\nOPTIONS: \n";
+		cout << "\nSee stats: '/stats'\n";
+		cout << "Credits: '/credits'\n" << endl;
 		cout << "OPTION: ";
 		while (cin >> text)
 		{
