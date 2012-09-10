@@ -1,9 +1,8 @@
 /*
 	Jordi Hoock Castro
 */
-#include <iostream>
-#include <fstream>
-#include "classes/system.hpp"
+
+#include "system.cpp"
 using namespace std;
 
 /*
@@ -11,7 +10,9 @@ using namespace std;
 */
 string text;
 bool loggedIN = false;
-const bool maintence = false;
+bool comeFromReg = false;
+bool Registered;
+bool maintence = false;
 string regorlog;
 
 /*
@@ -72,19 +73,20 @@ int main ()
 		*/
 		if(regorlog == "/register")
 		{
-			if (_system->login())
-				cout << "You're username already exists";
+			if(_system->reg())
+			{
+				loggedIN = true;
+				comeFromReg = true;
+			}
 			else
-				cout << "You can do it ;)";
+				cout << "Sorry, Your name already exists in our database";
 		}
 
 		/*
 			Want the user login?, Yes? then check's if the user exists
 		*/
 		if(regorlog == "/login")
-		{
 			loggedIN = _system->login();
-		}
 
 	}
 	else
@@ -97,10 +99,13 @@ int main ()
 
 	if (loggedIN)
 	{
-
-		cout << "\nWelcome " << player->username << " you Logged in\n" << endl;
+		if(comeFromReg)
+		cout << "\nYou hace succesfully registered " << player->username << endl;
+		else
+		cout << "\nWelcome " << player->username << " Select your action please" << endl;
 		cout << "\nOPTIONS: \n";
-		cout << "\nSee stats: '/stats'\n";
+		cout << "\nExit Game: '/exit'\n";
+		cout << "See stats: '/stats'\n";
 		cout << "Credits: '/credits'\n" << endl;
 		cout << "OPTION: ";
 		while (cin >> text)
@@ -111,8 +116,8 @@ int main ()
 		}
 
 	}
-	else
-		cout << "Username is wrong";
+	else if(regorlog != "/register")
+		cout << "Username is wrong" << endl;
 
 
 }
