@@ -89,4 +89,5 @@ bool core::reg()
 core::~core()
 {
 	userFile.close();
+	saveFile.close();
 }
