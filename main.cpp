@@ -9,11 +9,13 @@ using namespace std;
 	Variables
 */
 string text;
+string TempSelected;
 bool loggedIN = false;
 bool comeFromReg = false;
 bool Registered;
 bool maintence = false;
 string regorlog;
+
 
 /*
 	A structure from base of user details.
@@ -30,6 +32,9 @@ struct user
 */
 int main ()
 {
+	/*
+		Instancing player structure
+	*/
 	player = &u;
 
 	if (! maintence)
@@ -64,9 +69,8 @@ int main ()
 			Creating the object with user details, and
 			debug mode, maintence mode.
 		*/
-		core s(&player->username, &player->password, false, maintence);
-		core *_system = &s;
-
+		core sys(&player->username, &player->password, false, maintence);
+		core *_system = &sys;
 
 		/*
 			The user want to register
@@ -79,7 +83,7 @@ int main ()
 				comeFromReg = true;
 			}
 			else
-				cout << "Sorry, Your name already exists in our database";
+				cout << "Sorry, Your name already exists in our database" << endl;
 		}
 
 		/*
@@ -108,9 +112,22 @@ int main ()
 		cout << "See stats: '/stats'\n";
 		cout << "Credits: '/credits'\n" << endl;
 		cout << "OPTION: ";
+		core us(&player->username, &player->password, false, maintence);
+		core *user = &us;
+
 		while (cin >> text)
 		{
-			cout << "OPTION: " ;
+
+			if(text == "/stats")
+			{
+				if(user->InitStats())
+				{
+					cout << "\nStats of user: " << user->userstats[0] << endl;
+					cout << "Type of player:  " << user->userstats[1] << endl;
+					cout << "Money of player: " << user->userstats[2] << endl;
+				}
+			}
+
 			if(text == "/exit")
 				break; 
 		}
